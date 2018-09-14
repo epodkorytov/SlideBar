@@ -8,17 +8,32 @@ import UIKit
 
 public class SlideBar: UICollectionView, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    private var totalWidth: CGFloat = 0.0
+    private var maxItemWidth: CGFloat = 0.0
+    private var totalMaxWidth: CGFloat { return maxItemWidth * CGFloat(itemsTitle.count) }
+    //MARK: - Variables
     
-//    MARK: - Variables
-    
-    public var output: SlideBarOutput?
+    public var output: SlideBarDelegate?
     
     public var itemsTitle: Array<String> = [] {
         didSet {
-            dataSource = self;
-            delegate   = self;
+            calcArrangeConst()
+            dataSource = self
+            delegate   = self
             reloadData()
             selectItem(at: 0)
+        }
+    }
+    private func calcArrangeConst(){
+        if style.arrangeByWidth  == true {
+            totalWidth = 0
+            maxItemWidth = 0
+            
+            for item in itemsTitle {
+                let width: CGFloat = getSize(forText: item, withFont: style.font).width + Constants.FrameValueAttributes.menuItemSpacing
+                totalWidth += width
+                maxItemWidth = max(maxItemWidth, width)
+            }
         }
     }
     
@@ -61,10 +76,10 @@ public class SlideBar: UICollectionView, UICollectionViewDataSource, UICollectio
     public convenience init(style: CommonSlideBarStyleProtocol) {
         let finalStyle = style.customStyle == nil ? style.baseStyle : style.customStyle!
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        layout.minimumInteritemSpacing = finalStyle.interItemSpacing
-        layout.minimumLineSpacing = 0
-        layout.sectionInset = UIEdgeInsets(top: 0.0, left: finalStyle.interItemSpacing, bottom: 0.0, right: finalStyle.interItemSpacing)
+            layout.scrollDirection = .horizontal
+            layout.minimumInteritemSpacing = finalStyle.interItemSpacing
+            layout.minimumLineSpacing = 0
+            layout.sectionInset = UIEdgeInsets(top: 0.0, left: finalStyle.interItemSpacing, bottom: 0.0, right: finalStyle.interItemSpacing)
         
         self.init(frame: .zero, collectionViewLayout: layout)
         self.style = finalStyle
@@ -116,24 +131,25 @@ public class SlideBar: UICollectionView, UICollectionViewDataSource, UICollectio
         
         isUserInteractionEnabled = true
         delaysContentTouches = true
-        contentInset = UIEdgeInsetsMake(0, 7, 0, 7)
+        contentInset = UIEdgeInsets.init(top: 0, left: 7, bottom: 0, right: 7)
         
         register(SlideBarCollectionViewCell.self, forCellWithReuseIdentifier: Constants.Identifiers.slideBarCell)
         showsHorizontalScrollIndicator = false
         isPagingEnabled = false
-        delegate   = nil;
-        dataSource = nil;
+        delegate   = nil
+        dataSource = nil
     }
 
     
     func setupStyle() {
         backgroundColor = style.backgroundColor
         indicator.backgroundColor = style.indicatorColor.cgColor
+        calcArrangeConst()
     }
     
     
     func getSize(forText text: String, withFont font: UIFont) -> CGSize {
-        let fontAttributes = [NSAttributedStringKey.font: font]
+        let fontAttributes = [NSAttributedString.Key.font: font]
         return (text as NSString).size(withAttributes: fontAttributes)
     }
     
@@ -144,9 +160,13 @@ public class SlideBar: UICollectionView, UICollectionViewDataSource, UICollectio
     
     
     func getItemSize(at indexPath: IndexPath) -> CGSize {
-        return CGSize(width: getSize(forText: itemsTitle[indexPath.item],
-                                     withFont: style.font).width + Constants.FrameValueAttributes.menuItemSpacing,
-                      height: frame.height - 2.5)
+        var width: CGFloat = getSize(forText: itemsTitle[indexPath.item], withFont: style.font).width + Constants.FrameValueAttributes.menuItemSpacing
+        print("frame.width: \(self.frame.width), totalMaxWidth: \(totalMaxWidth), arrangeByWidth: \(style.arrangeByWidth)")
+        if style.arrangeByWidth == true && (totalMaxWidth <= self.frame.width) {
+            width = (self.frame.width - (contentInset.left + contentInset.right))/CGFloat(itemsTitle.count)
+        }
+        
+        return CGSize(width: width, height: frame.height - 2.5)
     }
     
     
@@ -158,12 +178,10 @@ public class SlideBar: UICollectionView, UICollectionViewDataSource, UICollectio
         return itemsTitle.count
     }
     
-    public func collectionView(_ collectionView: UICollectionView,
-                               cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell
     {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Constants.Identifiers.slideBarCell,
                                                       for: indexPath) as! SlideBarCollectionViewCell
-        
         cell.styleConfig = style
         cell.itemTitle = itemsTitle[indexPath.item]
         cell.isSelected = indexPath.item == selectedIndex
@@ -187,16 +205,13 @@ public class SlideBar: UICollectionView, UICollectionViewDataSource, UICollectio
         let oldIndex = selectedIndex
         selectItem(at: indexPath.item)
 
-        output?.slideBarOutput(self, didSelecteItemAtIndex: selectedIndex,
-                                didExecuteTransition: abs(selectedIndex - oldIndex) > 1)
+        output?.slideBar(self, didSelecteItemAtIndex: selectedIndex, didExecuteTransition: abs(selectedIndex - oldIndex) > 1)
     }
     
     
 //    MARK: UICollectionViewDelegateFlowLayout
     
-    public func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
-                        sizeForItemAt indexPath: IndexPath) -> CGSize
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
         return getItemSize(at: indexPath)
     }

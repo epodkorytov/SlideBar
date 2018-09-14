@@ -9,7 +9,7 @@
 import UIKit
 import SlideBar
 
-class ViewController: UIViewController, SlideBarOutput {
+class ViewController: UIViewController, SlideBarDelegate {
 
 //    MARK: - Constants
     
@@ -20,10 +20,10 @@ class ViewController: UIViewController, SlideBarOutput {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let slideMenu = SlideBar(style: CommonSlideBarStyle())
-        slideMenu.itemsTitle = ["Все", "Онлайн", "Топ", "Проверенные", "Избранные", "Симпатичные", "Нормальные"]
-        slideMenu.output = self
+        let style = CommonSlideBarStyle()
+        let slideMenu = SlideBar(style: style)
+            slideMenu.itemsTitle = ["All", "Active", "History"]
+            slideMenu.output = self
         
         view.backgroundColor = .orange
 
@@ -40,7 +40,7 @@ class ViewController: UIViewController, SlideBarOutput {
 
 //    MARK: SlideMenuOutput
     
-    func slideBarOutput(_ sender: SlideBar, didSelecteItemAtIndex index: Int, didExecuteTransition flag: Bool) {
+    func slideBar(_ sender: SlideBar, didSelecteItemAtIndex index: Int, didExecuteTransition flag: Bool) {
         print("did select index \(index)")
     }
 

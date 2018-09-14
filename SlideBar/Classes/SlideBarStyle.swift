@@ -26,20 +26,11 @@ public protocol SlideBarStyleProtocol {
     
     // FRAME VALUE ATTRIBUTES
     var interItemSpacing: CGFloat { set get }
-    
+    var arrangeByWidth: Bool { set get }
 }
 
 
 // MARK: - Structs
-
-public struct CommonSlideBarStyle: CommonSlideBarStyleProtocol {
-    public var baseStyle:   SlideBarStyleProtocol = SlideBarStyleDefault()
-    public var customStyle: SlideBarStyleProtocol?
-    
-    public init() {}
-}
-
-
 struct SlideBarStyleDefault: SlideBarStyleProtocol {
     // FONTS
     public var font: UIFont       = .systemFont(ofSize: 14.0)
@@ -53,7 +44,19 @@ struct SlideBarStyleDefault: SlideBarStyleProtocol {
     public var bgColor: UIColor         = .clear
     
     // FRAME VALUE ATTRIBUTES
-    public var interItemSpacing: CGFloat = 24.0
+    public var interItemSpacing: CGFloat = 0.0
+    
+    public var arrangeByWidth: Bool = true
     
     public init() {}
 }
+
+public struct CommonSlideBarStyle: CommonSlideBarStyleProtocol {
+    public var baseStyle:   SlideBarStyleProtocol = SlideBarStyleDefault()
+    public var customStyle: SlideBarStyleProtocol?
+    
+    public init() {}
+}
+
+
+

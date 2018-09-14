@@ -9,10 +9,10 @@ import UIKit
 class ConstraintRoutines {
     
     class func constraintFor(_ subview: UIView,
-                             attribute: NSLayoutAttribute,
+                             attribute: NSLayoutConstraint.Attribute,
                              value: CGFloat = 0.0,
                              toView: Any? = nil,
-                             attribute2: NSLayoutAttribute = .notAnAttribute,
+                             attribute2: NSLayoutConstraint.Attribute = .notAnAttribute,
                              active: Bool = true) -> NSLayoutConstraint
     {
         let result = NSLayoutConstraint(item: subview,

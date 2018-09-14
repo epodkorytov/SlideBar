@@ -4,8 +4,8 @@
 //
 
 
-public protocol SlideBarOutput {
+public protocol SlideBarDelegate {
     
-    func slideBarOutput(_ sender: SlideBar, didSelecteItemAtIndex index: Int, didExecuteTransition flag: Bool) 
+    func slideBar(_ sender: SlideBar, didSelecteItemAtIndex index: Int, didExecuteTransition flag: Bool) 
     
 }
