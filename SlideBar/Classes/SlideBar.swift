@@ -58,7 +58,7 @@ public class SlideBar: UICollectionView, UICollectionViewDataSource, UICollectio
         }
     }
     
-    var selectedIndex: Int = -1
+    public var selectedIndex: Int = -1
     let indicator = CALayer()
     
     
@@ -161,7 +161,7 @@ public class SlideBar: UICollectionView, UICollectionViewDataSource, UICollectio
     
     func getItemSize(at indexPath: IndexPath) -> CGSize {
         var width: CGFloat = getSize(forText: itemsTitle[indexPath.item], withFont: style.font).width + Constants.FrameValueAttributes.menuItemSpacing
-        print("frame.width: \(self.frame.width), totalMaxWidth: \(totalMaxWidth), arrangeByWidth: \(style.arrangeByWidth)")
+        //print("frame.width: \(self.frame.width), totalMaxWidth: \(totalMaxWidth), arrangeByWidth: \(style.arrangeByWidth)")
         if style.arrangeByWidth == true && (totalMaxWidth <= self.frame.width) {
             width = (self.frame.width - (contentInset.left + contentInset.right))/CGFloat(itemsTitle.count)
         }
