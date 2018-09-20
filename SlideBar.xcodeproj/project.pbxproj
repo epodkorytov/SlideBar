@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3B0D3FF11F8CD3030056A691 /* SlideBar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DAC8E07D1F74F70300EBE48B /* SlideBar.framework */; };
 		3B0D3FF21F8CD3030056A691 /* SlideBar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DAC8E07D1F74F70300EBE48B /* SlideBar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DA29B1F01F74FBF300B6B9B3 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29B1EF1F74FBF300B6B9B3 /* Constants.swift */; };
 		DA29B1F21F75078800B6B9B3 /* SlideBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA29B1F11F75078800B6B9B3 /* SlideBarCollectionViewCell.swift */; };
@@ -78,7 +77,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B0D3FF11F8CD3030056A691 /* SlideBar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -141,16 +139,6 @@
 		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		DAC8E07A1F74F70300EBE48B /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
 		DAC8E07C1F74F70300EBE48B /* SlideBar */ = {
 			isa = PBXNativeTarget;
@@ -158,7 +146,6 @@
 			buildPhases = (
 				DAC8E0781F74F70300EBE48B /* Sources */,
 				DAC8E0791F74F70300EBE48B /* Frameworks */,
-				DAC8E07A1F74F70300EBE48B /* Headers */,
 				DAC8E07B1F74F70300EBE48B /* Resources */,
 			);
 			buildRules = (
@@ -424,7 +411,7 @@
 		DAC8E0861F74F70300EBE48B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -434,7 +421,7 @@
 				INFOPLIST_FILE = SlideBar/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SlideBar;
+				PRODUCT_BUNDLE_IDENTIFIER = Framework.SlideBar;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -446,7 +433,7 @@
 		DAC8E0871F74F70300EBE48B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_MODULES = NO;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -456,7 +443,7 @@
 				INFOPLIST_FILE = SlideBar/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SlideBar;
+				PRODUCT_BUNDLE_IDENTIFIER = Framework.SlideBar;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 4.2;
@@ -470,10 +457,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2YCCX64PW6;
+				DEVELOPMENT_TEAM = 82QZ2C759F;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SlideBar.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = Framework.SlideBar.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -486,10 +473,10 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2YCCX64PW6;
+				DEVELOPMENT_TEAM = 82QZ2C759F;
 				INFOPLIST_FILE = Example/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.SlideBar.Example;
+				PRODUCT_BUNDLE_IDENTIFIER = Framework.SlideBar.Example;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
